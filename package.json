@@ -14,19 +14,22 @@
   "author": "",
   "license": "BSD-2-Clause",
   "devDependencies": {
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "react-map-gl": "^3.2.0",
     "@kadira/storybook": "^2.35.3",
-    "babel-register": "^6.24.1",
     "babel-polyfill": "^6.23.0",
     "babel-preset-stage-0": "^6.24.1",
+    "babel-register": "^6.24.1",
     "css-loader": "^0.26.1",
     "eslint": "^3.13.0",
     "html-webpack-plugin": "^2.26.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-map-gl": "^3.2.0",
     "storybook-addon-material-ui": "^0.7.4",
     "style-loader": "^0.13.1",
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.16.2"
+  },
+  "dependencies": {
+    "immutable": "^3.8.2"
   }
 }
