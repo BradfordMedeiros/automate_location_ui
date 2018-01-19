@@ -1,4 +1,5 @@
 import React, { PropTypes, Component } from 'react';
+import Dimensions from 'react-dimensions';
 import ReactMapGL from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import {SVGOverlay, NavigationControl} from 'react-map-gl';
@@ -10,23 +11,27 @@ function redraw({project}) {
   return <circle cx={cx} cy={cy} r={4} fill="blue" />;
 }
 
-const defaultViewport = {
-  width: 800,
-  height: 1000,
-  latitude: 37.7577,
-  longitude: -122.4376,
-  zoom: 8
-};
+
 
 class Map extends Component {
   render() {
     const { viewport, onViewportChanged } = this.props;
+
+    const defaultViewport = {
+      width: this.props.containerWidth,
+      height: this.props.containerHeight,
+      latitude: 37.7577,
+      longitude: -122.4376,
+      zoom: 8
+    };
+
     const viewportToRender  = viewport ? viewport : defaultViewport;
+    console.log('viewport is: ', viewportToRender);
+
     return (
       <ReactMapGL
         width="100%"
-        style={{ width: '100%' }}
-        //mapStyle="mapbox://styles/mapbox/dark-v9"
+        height="100%"
         {...viewportToRender}
         onClick={(event,v) => {
           window.e = event;
@@ -37,10 +42,6 @@ class Map extends Component {
         onViewportChange={onViewportChanged}
       >
         <SVGOverlay redraw={redraw} />
-
-        <div style={{position: 'absolute', right: 0}}>
-          <NavigationControl onViewportChange={viewort => this.setState({ viewport })} />
-        </div>
         <CustomMarker latitude={47.78} longitude={-122.41}  />
       </ReactMapGL>
     );
@@ -52,4 +53,4 @@ Map.propTypes = {
   onViewportChanged: PropTypes.object,
 };
 
-export default Map;
+export default Dimensions()(Map);

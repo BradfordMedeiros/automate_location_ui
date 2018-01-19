@@ -4,15 +4,16 @@ import Map from './Map/Map';
 import ControlPanel from './ControlPanel';
 
 class App extends Component {
-  state = { viewport: null };
-
+  state = {
+    viewport: null
+  };
   render () {
     return (
-      <div style={{ border: '1px solid red', background: 'black', position: 'absolute', width: '100vw', height: '100vh' }}>
-        <div style={{ position: 'absolute', width: 'calc(100% - 400px)', border: '1px solid yellow' }}>
+      <div style={{ position: 'absolute', width: '100vw', height: '100vh' }}>
+        <div style={{ position: 'absolute', left: 0, top: 0, right: 0, bottom: 0, overflow: 'hidden' }}>
           <Map viewport={this.state.viewport} onViewportChanged={viewport => { this.setState({ viewport })}} />
         </div>
-        <ControlPanel style={{ position: 'absolute', background: 'green', right: 0, width: 400, height: '100%' }}/>
+        <ControlPanel style={{ position: 'absolute', top: 0, right: 0, width: 400, height: '100%' }}/>
       </div>
     )
   }
