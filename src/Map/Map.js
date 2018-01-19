@@ -5,6 +5,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import {SVGOverlay, NavigationControl} from 'react-map-gl';
 
 import CustomMarker from './components/CustomMarker';
+import Toolbar from './components/Toolbar/Toolbar';
 
 function redraw({project}) {
   const [cx, cy] = project([-122, 37]);
@@ -15,7 +16,7 @@ function redraw({project}) {
 
 class Map extends Component {
   render() {
-    const { viewport, onViewportChanged } = this.props;
+    const { viewport, onViewportChanged, toolbarNegativeWidth } = this.props;
 
     const defaultViewport = {
       width: this.props.containerWidth,
@@ -32,6 +33,7 @@ class Map extends Component {
       <ReactMapGL
         width="100%"
         height="100%"
+        mapStyle="mapbox://styles/mapbox/satellite-v9"
         {...viewportToRender}
         onClick={(event,v) => {
           window.e = event;
@@ -43,6 +45,12 @@ class Map extends Component {
       >
         <SVGOverlay redraw={redraw} />
         <CustomMarker latitude={47.78} longitude={-122.41}  />
+        <Toolbar
+          options={['View Installations', 'Manage Installation', 'Jump To Automate']}
+          negativeWidth={toolbarNegativeWidth}
+          selectedContent={this.props.selectedContent}
+          onContentSelected={this.props.onContentSelected}
+        />
       </ReactMapGL>
     );
   }
@@ -51,6 +59,10 @@ class Map extends Component {
 Map.propTypes = {
   viewport: PropTypes.object,
   onViewportChanged: PropTypes.object,
+
+  toolbarNegativeWidth: PropTypes.number,
+  selectedContent: PropTypes.string,
+  onContentSelected: PropTypes.func,
 };
 
 export default Dimensions()(Map);
