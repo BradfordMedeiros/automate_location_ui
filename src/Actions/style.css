@@ -1,0 +1,13 @@
+
+.action {
+    min-width: 200px;
+    display: flex;
+    justify-content: center;
+    font-size: 12px;
+    font-family: monospace;
+    cursor: pointer;
+}
+
+.action:hover {
+    color: white;
+}

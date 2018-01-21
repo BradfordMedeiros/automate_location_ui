@@ -28,7 +28,7 @@ const jumpToAutomate = installationName => {
 
 const contentInstallationMap = {
   'View Installations': <ViewInstallations onClick={jumpToInstallation} />,
-  'Manage Installation': <ViewInstallations />,
+  'Manage Installations': <ViewInstallations />,
   'Jump To Automate': <ViewInstallations onClick={jumpToAutomate} />,
 };
 
