@@ -1,13 +1,12 @@
 
 #content_panel {
     position: absolute;
-    top: 60px;
+    top: 90px;
     background: rgba(0,0,0,0.1);
     bottom: 0;
     border: 1px solid black;
-    box-shadow: 0px 0px 10px 1px black;
-    background: rgb(30, 30, 30);
-
+    box-shadow: 0px 0px 8px 2px black inset;
+    background: rgba(10,10,10,0.96);
     right: 400px;
     width: 0;
 }

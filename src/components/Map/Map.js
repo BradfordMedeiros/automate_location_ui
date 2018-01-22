@@ -13,8 +13,12 @@ function redraw({project}) {
 
 
 class Map extends Component {
+  state = {
+    viewport: null,
+  }
+  onViewportChanged = viewport => { this.setState({ viewport: viewport })}
   render() {
-    const { viewport, onViewportChanged, } = this.props;
+    const viewport = this.state.viewport;
 
     const defaultViewport = {
       width: this.props.containerWidth,
@@ -29,7 +33,6 @@ class Map extends Component {
 
     return (
       <ReactMapGL
-
         mapStyle="mapbox://styles/mapbox/satellite-v9"
         {...viewportToRender}
         onClick={(event,v) => {
@@ -38,7 +41,7 @@ class Map extends Component {
           console.log('map clicked');
         }}
         mapboxApiAccessToken="pk.eyJ1IjoiYnJhZGZvcmRtZWRlaXJvcyIsImEiOiJjamNpbzlyZHYzcjN0MzNsbDhhMTYwZGpjIn0.Av3F9QUzoVSBi7g6HQt_TA"
-        onViewportChange={onViewportChanged}
+        onViewportChange={this.onViewportChanged}
       >
         <SVGOverlay redraw={redraw} />
         <CustomMarker latitude={47.78} longitude={-122.41}  />
@@ -46,10 +49,5 @@ class Map extends Component {
     );
   }
 }
-
-Map.propTypes = {
-  viewport: PropTypes.object,
-  onViewportChanged: PropTypes.object,
-};
 
 export default Dimensions()(Map);

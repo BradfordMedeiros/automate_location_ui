@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 
-const Toolbar = ({ negativeWidth, options, selectedContent, onContentSelected, style }) => (
+const Toolbar = ({ negativeWidth, options, style }) => (
   <div style={{
     ...style,
     color: 'whitesmoke',
