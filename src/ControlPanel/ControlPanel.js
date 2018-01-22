@@ -35,6 +35,7 @@ const contentInstallationMap = {
 class ControlPanel extends Component {
   render() {
     const {contentType, style} = this.props;
+    console.log('content type: ', contentType);
     return (
       <div style={{...style, ...styles.outer }}>
         <div style={styles.title}>{contentType}</div>

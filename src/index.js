@@ -6,12 +6,20 @@ import ContentPanel from './ContentPanel/ContentPanel';
 import Actions from './Actions/Actions';
 import Toolbar from './Toolbar/Toolbar';
 
+
+/*
+  notes: create pull out drawer on left size to bring up content editor view
+  this will be a nice toolbar that can select between adding markers, 3d objects, other tags, etc
+
+
+
+ */
 const controlPanelWidth = 400;
 
 const actionMap = {
-  'View Installations': ['Goto on Map', 'Summary Info'],
-  'Manage Installations': ['Add New','Edit Configuration', 'Delete Selected'],
-  'Jump To Automate': [],
+  'View Installations': ['Goto on Map', 'Summary Info', "Jump To Automate"],
+  'Manage Installations': ['Add New','Edit Layout', 'Edit Data Sources', 'Delete Selected'],
+  'Misc': ['Set Default Start Point',],
 };
 
 class App extends Component {
@@ -27,7 +35,7 @@ class App extends Component {
       <div style={{ position: 'absolute', width: '100vw', height: '100vh' }}>
         <ControlPanel
           contentType={this.state.content}
-          style={{ position: 'absolute', top: 0, right: 0, width: controlPanelWidth, height: '100%' }}
+          style={{ position: 'absolute', top: 0, right: 0, width: controlPanelWidth, height: '100%', zIndex: 1 }}
         />
         <ContentPanel style={{ zIndex: 1 }} />
         <div style={{ position: 'absolute', zIndex: 100, width: '100%'  }}>

@@ -28,7 +28,8 @@ const ViewInstallations = ({ onClick }) => (
         style={styles.installation}
         onClick={() => {
           onClick(installation)
-        }}>{installation}
+        }}>
+        {installation}
       </div>
     ))}
   </div>
