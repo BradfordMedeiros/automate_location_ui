@@ -1,12 +1,6 @@
 
 import React from 'react';
 
-const installations = [
-  'Installation 1',
-  'osme other one',
-  'yes yet another',
-];
-
 const styles = {
   installation : {
     background: 'black',
@@ -18,10 +12,11 @@ const styles = {
     border: '1px solid rgba(210,210,210,0.1)',
     cursor: 'pointer',
     fontFamily: 'courier',
+    overflowX: 'auto',
   }
 };
 
-const ViewInstallations = ({ onClick }) => (
+const ViewInstallations = ({ installations, onClick }) => (
   <div>
     {installations.map(installation => (
       <div

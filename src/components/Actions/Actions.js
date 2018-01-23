@@ -15,9 +15,10 @@ const Toolbar = ({ negativeWidth, options, style }) => (
   }}>
     {options && options.map(option => (
       <div
+        onClick={option.onClick}
         className="action"
       >
-        {option}
+        {option.name}
       </div>
     ))}
   </div>

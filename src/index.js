@@ -6,11 +6,12 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import logger from './util/logger';
 import reducer from './containers/module';
-import Map from './containers/Map';
+import { container as Map } from './containers/Map';
 import { container as ControlPanel } from './containers/ControlPanel';
 import { container as ContentPanel } from './containers/ContentPanel';
 import { container as Actions } from './containers/Actions';
 import { container as Toolbar } from './containers/Toolbar';
+import { container as HelpInfo } from './containers/HelpInfo';
 
 /*
  notes: create pull out drawer on left size to bring up content editor view
@@ -31,6 +32,7 @@ const App = () => (
       <div style={{ position: 'absolute', zIndex: 100, width: '100%'  }}>
         <Toolbar negativeWidth={controlPanelWidth} />
         <Actions negativeWidth={controlPanelWidth} />
+        <HelpInfo />
       </div>
       <div style={{ position: 'relative', left: 0,  right: 0, top: 0, bottom: 0, overflow: 'hidden' }}>
         <Map />

@@ -2,15 +2,13 @@ import React, { PropTypes, Component } from 'react';
 import Dimensions from 'react-dimensions';
 import ReactMapGL from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import {SVGOverlay, NavigationControl} from 'react-map-gl';
-import CustomMarker from './components/CustomMarker';
+//import {SVGOverlay, NavigationControl} from 'react-map-gl';
+//import CustomMarker from './components/CustomMarker';
 
-function redraw({project}) {
+/*function redraw({project}) {
   const [cx, cy] = project([-122, 37]);
   return <circle cx={cx} cy={cy} r={4} fill="blue" />;
-}
-
-
+}*/
 
 class Map extends Component {
   state = {
@@ -18,6 +16,7 @@ class Map extends Component {
   }
   onViewportChanged = viewport => { this.setState({ viewport: viewport })}
   render() {
+    const { onLocationSelected, cursorType } = this.props;
     const viewport = this.state.viewport;
 
     const defaultViewport = {
@@ -29,25 +28,33 @@ class Map extends Component {
     };
 
     const viewportToRender  = viewport ? viewport : defaultViewport;
-    console.log('viewport is: ', viewportToRender);
 
     return (
       <ReactMapGL
+        style={{
+          cursor: cursorType ? cursorType : undefined,
+        }}
         mapStyle="mapbox://styles/mapbox/satellite-v9"
         {...viewportToRender}
         onClick={(event,v) => {
           window.e = event;
-          window.ee = v;
-          console.log('map clicked');
+          if (onLocationSelected){
+            onLocationSelected({ longitude: e.lngLat[0], latitude: e.lngLat[1] });
+          }
         }}
         mapboxApiAccessToken="pk.eyJ1IjoiYnJhZGZvcmRtZWRlaXJvcyIsImEiOiJjamNpbzlyZHYzcjN0MzNsbDhhMTYwZGpjIn0.Av3F9QUzoVSBi7g6HQt_TA"
         onViewportChange={this.onViewportChanged}
       >
-        <SVGOverlay redraw={redraw} />
-        <CustomMarker latitude={47.78} longitude={-122.41}  />
+        {/*<SVGOverlay redraw={redraw} />*/}
+        {/*<CustomMarker latitude={47.78} longitude={-122.41}  />*/}
       </ReactMapGL>
     );
   }
 }
+
+Map.propTypes = {
+  cursorType: PropTypes.string,
+  onLocationSelected: PropTypes.func,
+};
 
 export default Dimensions()(Map);

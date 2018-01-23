@@ -17,29 +17,13 @@ const styles = {
 };
 
 
-const jumpToInstallation = () => {
-  console.log('jump to installation placeholder');
-};
-
-const jumpToAutomate = installationName => {
-  console.log('jump to automate');
-  window.location = 'http://localhost:3000';
-};
-
-const contentInstallationMap = {
-  'View Installations': <ViewInstallations onClick={jumpToInstallation} />,
-  'Manage Installations': <ViewInstallations />,
-  'Jump To Automate': <ViewInstallations onClick={jumpToAutomate} />,
-};
-
 class ControlPanel extends Component {
   render() {
-    const {contentType, style} = this.props;
-    console.log('content type: ', contentType);
+    const {contentType, installations, style} = this.props;
     return (
       <div style={{...style, ...styles.outer }}>
         <div style={styles.title}>{contentType}</div>
-        {contentInstallationMap[contentType]}
+        <ViewInstallations installations={installations}  />,
       </div>
     )
   }

@@ -1,0 +1,28 @@
+
+#help_info {
+    position: absolute;
+    display: flex;
+    justify-content: flex-end;
+    left: 0;
+    right: 400px;
+    padding: 12px;
+    margin-right: 24px;
+    color: whitesmoke;
+    font-size: 18px;
+    font-family: fantasy;
+    text-shadow: 0px 1px 10px black;
+}
+
+#cancel_info {
+    margin-left: 12px;
+    font-family: monospace;
+    color: whitesmoke;
+    text-shadow: 0px 1px 1px black;
+    text-transform: uppercase;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    background: rgba(119, 44, 44, 0.62);
+    padding: 8px;
+    cursor: pointer;
+}
