@@ -1,0 +1,24 @@
+
+#name_dialog_outer {
+    width: 100%;
+    height: 100%;
+    background: rgb(10,10,10);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 48px;
+}
+
+#name_dialog_title {
+    color: steelblue;
+    font-family: courier;
+}
+
+#name_dialog_input {
+    background: none;
+    border: none;
+    font-size: 24px;
+    border-bottom: 1px solid grey;
+    color: whitesmoke;
+    font-family: monospace;
+}

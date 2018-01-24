@@ -2,10 +2,9 @@
 import React from 'react';
 import ActionsComponent from '../components/Actions/Actions';
 import { connect } from 'react-redux';
-import { setMode, setToggleContentPanel } from './module';
-import WithData from '../data/WithData';
+import { setMode, setToggleContentPanel, setContentPanelContent } from './module';
+import NameDialog from '../components/NameDialog/NameDialog';
 
-const addInstallation = WithData.requests.addInstallation;
 
 
 const Actions = ({ selectedContent, negativeWidth, onSetMode, onExpandContentPanel }) => {
@@ -31,13 +30,20 @@ const Actions = ({ selectedContent, negativeWidth, onSetMode, onExpandContentPan
           console.log('add new');
           //addInstallation('hello');
           onExpandContentPanel();
+          const cancel =  () => onExpandContentPanel();
+          const data = [];
           onSetMode('add_installation', {
-            setLocation: () => {
-              console.log('set location');
+            next: name => {
+              console.log('set with name: ', name);
+              onSetMode('add_installation:1', {
+                next: location => {
+                  console.log('inner next');
+                  data.push(location);
+                },
+                cancel,
+              })
             },
-            cancel: () => {
-              console.log('cancel add mode');
-            },
+            cancel,
           });
         },
       },
@@ -70,10 +76,13 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onExpandContentPanel: () => {
+    dispatch(setContentPanelContent(
+      <NameDialog />
+    ));
     dispatch(setToggleContentPanel());
   },
-  onSetMode: mode => {
-    dispatch(setMode(mode));
+  onSetMode: (mode, modeActions) => {
+    dispatch(setMode(mode, modeActions));
   }
 });
 

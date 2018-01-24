@@ -11,6 +11,7 @@
     font-size: 18px;
     font-family: fantasy;
     text-shadow: 0px 1px 10px black;
+    pointer-events: none;
 }
 
 #cancel_info {
@@ -25,4 +26,5 @@
     background: rgba(119, 44, 44, 0.62);
     padding: 8px;
     cursor: pointer;
+    pointer-events: visible;
 }

@@ -2,7 +2,6 @@
 #content_panel {
     position: absolute;
     top: 90px;
-    background: rgba(0,0,0,0.1);
     bottom: 0;
     border: 1px solid black;
     box-shadow: 0px 0px 8px 2px black inset;
