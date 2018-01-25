@@ -9,7 +9,13 @@ const ControlPanel = props => (
   <WithInstallations>
     {({ data }) => {
       return (
-        <ControlPanelComponent installations={data} {...props} />
+        <ControlPanelComponent
+          installations={data}
+          onClick={installation => {
+            console.log(installation);
+          }}
+          {...props}
+        />
       )
     }}
   </WithInstallations>

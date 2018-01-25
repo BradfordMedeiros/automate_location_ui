@@ -15,8 +15,9 @@ export const setSelectedContent = content => ({
   content,
 });
 
-export const setToggleContentPanel = () => ({
+export const setShowContentPanel = isVisible => ({
   type: 'set_is_content_expanded',
+  isVisible,
 });
 export const setContentPanelContent = content => ({
   type: 'set_content_panel_content',
@@ -28,6 +29,11 @@ export const setMode = (mode, modeActions) => ({
   mode,
   modeActions,
 });
+
+export const advanceStep = payload => (dispatch, getState) => {
+  const modeActions = getState().getIn(['reducer', 'modeActions']);
+  modeActions.next(payload);
+};
 
 export const cancelMode = () => (dispatch, getState) => {
   const modeActions = getState().getIn(['reducer', 'modeActions']);
@@ -46,7 +52,7 @@ const reducer = (state = initialState, action) => {
       return state.set('selectedContent', action.content);
     }
     case 'set_is_content_expanded': {
-      return state.set('isContentPanelExpanded', !state.get('isContentPanelExpanded'));
+      return state.set('isContentPanelExpanded', action.isVisible);
     }
     case 'set_content_panel_content': {
       return state.set('contentPanelContent', action.content);

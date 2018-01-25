@@ -2,12 +2,13 @@
 import React from 'react';
 import ActionsComponent from '../components/Actions/Actions';
 import { connect } from 'react-redux';
-import { setMode, setToggleContentPanel, setContentPanelContent } from './module';
+import { setMode, setShowContentPanel, setContentPanelContent, advanceStep } from './module';
 import NameDialog from '../components/NameDialog/NameDialog';
+import WithData from '../data/WithData';
 
+const addInstallation = WithData.requests.addInstallation;
 
-
-const Actions = ({ selectedContent, negativeWidth, onSetMode, onExpandContentPanel }) => {
+const Actions = ({ selectedContent, negativeWidth, onSetMode, onExpandContentPanel, hideContentPanel, advanceStep }) => {
   const actionMap = {
     'View Installations': [
       {
@@ -27,18 +28,19 @@ const Actions = ({ selectedContent, negativeWidth, onSetMode, onExpandContentPan
       {
         name: 'Add New',
         onClick: () => {
-          console.log('add new');
-          //addInstallation('hello');
-          onExpandContentPanel();
-          const cancel =  () => onExpandContentPanel();
-          const data = [];
-          onSetMode('add_installation', {
+          const data = { };
+          const cancel =  hideContentPanel;
+          onExpandContentPanel(<NameDialog onSubmit={advanceStep} />);
+          onSetMode('add_installation:0', {
             next: name => {
-              console.log('set with name: ', name);
+              data.name = name;
+              hideContentPanel();
               onSetMode('add_installation:1', {
                 next: location => {
-                  console.log('inner next');
-                  data.push(location);
+                  data.location = location;
+                  onSetMode('add_installation:success');
+                  addInstallation(data);
+                  setTimeout(() => onSetMode('default'), 3000);
                 },
                 cancel,
               })
@@ -75,11 +77,14 @@ const mapStateToProps = state => ({
 
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onExpandContentPanel: () => {
-    dispatch(setContentPanelContent(
-      <NameDialog />
-    ));
-    dispatch(setToggleContentPanel());
+  advanceStep: payload => dispatch(advanceStep(payload)),
+  onExpandContentPanel: content => {
+    dispatch(setContentPanelContent(content));
+    dispatch(setShowContentPanel(true));
+  },
+  hideContentPanel: () =>  {
+    dispatch(setShowContentPanel(false));
+    dispatch(setContentPanelContent(null));
   },
   onSetMode: (mode, modeActions) => {
     dispatch(setMode(mode, modeActions));

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ToolbarComponent from '../components/Toolbar/Toolbar';
-import { setSelectedContent, setToggleContentPanel } from './module';
+import { setSelectedContent, setShowContentPanel } from './module';
 
 const Toolbar = ({ selectedContent, onContentSelected, negativeWidth, style }) => (
   <ToolbarComponent
@@ -20,7 +20,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onContentSelected: content => {
     if (content === 'Misc'){
-      dispatch(setToggleContentPanel())
+      dispatch(setShowContentPanel())
     }else{
       dispatch(setSelectedContent(content));
     }

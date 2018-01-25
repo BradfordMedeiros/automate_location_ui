@@ -28,7 +28,7 @@ const App = () => (
   <Provider store={store}>
     <div style={{ position: 'absolute', width: '100vw', height: '100vh' }}>
       <ControlPanel style={{ position: 'absolute', top: 0, right: 0, width: controlPanelWidth, height: '100%', zIndex: 1 }} />
-      <ContentPanel style={{ zIndex: 1 }} />
+      <ContentPanel  style={{ zIndex: 1 }} />
       <div style={{ position: 'absolute', zIndex: 100, width: '100%'  }}>
         <Toolbar negativeWidth={controlPanelWidth} />
         <Actions negativeWidth={controlPanelWidth} />

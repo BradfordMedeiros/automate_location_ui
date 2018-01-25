@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ViewInstallations from './components/ViewInstallations';
 
 const styles = {
   outer: {
@@ -13,17 +12,39 @@ const styles = {
     background: 'rgb(30,30,30)',
     color: 'rgb(30,30,30)',
     padding: 20,
+  },
+  installation: {
+    background: 'black',
+    color: 'whitesmoke',
+    fontSize: 20,
+    display: 'flex',
+    justifyContent: 'center',
+    padding: 18,
+    border: '1px solid rgba(210,210,210,0.1)',
+    cursor: 'pointer',
+    fontFamily: 'courier',
+    overflowX: 'auto',
   }
 };
 
 
 class ControlPanel extends Component {
   render() {
-    const {contentType, installations, style} = this.props;
+    const {contentType, onClick, installations, style} = this.props;
     return (
       <div style={{...style, ...styles.outer }}>
         <div style={styles.title}>{contentType}</div>
-        <ViewInstallations installations={installations}  />,
+        <div>
+          {installations.map(installation => (
+            <div
+              style={styles.installation}
+              onClick={() => {
+                onClick(installation)
+              }}>
+              {installation.name}
+            </div>
+          ))}
+        </div>
       </div>
     )
   }

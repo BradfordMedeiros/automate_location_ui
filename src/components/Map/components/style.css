@@ -1,0 +1,13 @@
+
+.custom_marker {
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid black;
+    color: whitesmoke;
+    border-radius: 8%;
+}
+
+.custom_marker:hover {
+    background: rgba(210,210,210, 0.8);
+    color: rgba(0,0,0,0.8);
+}

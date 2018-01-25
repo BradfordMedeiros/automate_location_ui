@@ -1,19 +1,39 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import MapComponent from '../components/Map/Map';
+import { advanceStep } from './module';
+import WithData from '../data/WithData';
+const WithInstallations = WithData.polling.WithInstallations;
 
-const Map = ({ mode }) => (
-  <MapComponent
-    cursorType={mode ===  'add_installation' ? 'crosshair': undefined}
-    onLocationSelected={(location) => {
-      console.log('location: ', location);
-    }}
-  />
-);
+const Map = ({ mode, onAdvanceStep }) => {
+  const isModeAddInstallation1 = mode === 'add_installation:1';
+  return (
+    <WithInstallations>
+      {({ data }) => {
+        window.dd = data;
+        return (
+          <MapComponent
+            customMarkers={data}
+            cursorType={isModeAddInstallation1 ? 'crosshair' : undefined}
+            onLocationSelected={location => {
+              if (isModeAddInstallation1) {
+                onAdvanceStep(location);
+              }
+            }}
+          />
+        )
+      }}
+    </WithInstallations>
+  );
+};
 
 const mapStateToProps = state => ({
   mode: state.getIn(['reducer', 'mode']),
 });
 
-export const container = connect(mapStateToProps)(Map);
+const mapDispatchToProps = dispatch => ({
+  onAdvanceStep: location => dispatch(advanceStep(location)),
+});
+
+export const container = connect(mapStateToProps, mapDispatchToProps)(Map);
 

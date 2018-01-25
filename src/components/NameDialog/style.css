@@ -12,6 +12,7 @@
 #name_dialog_title {
     color: steelblue;
     font-family: courier;
+    margin-bottom: 8px;
 }
 
 #name_dialog_input {
@@ -21,4 +22,13 @@
     border-bottom: 1px solid grey;
     color: whitesmoke;
     font-family: monospace;
+}
+#name_dialog_submit {
+    background: rgb(12,12,12);
+    border: 1px solid black;
+    font-size: 18px;
+    color: steelblue;
+    padding: 18px;
+    font-family: courier;
+    cursor: pointer;
 }

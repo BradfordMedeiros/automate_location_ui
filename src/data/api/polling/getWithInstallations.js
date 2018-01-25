@@ -1,6 +1,9 @@
 import { Component, PropTypes } from 'react';
 
-export const installations = ['one','two','three' ];
+export const installations = [
+  { name: 'test', location: { latitude: 34, longitude: 32}},
+];
+window.i = installations;
 
 
 const getWithInstallations = (AUTOMATE_CORE_URL) => {

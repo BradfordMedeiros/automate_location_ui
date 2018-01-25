@@ -3,7 +3,7 @@ import Dimensions from 'react-dimensions';
 import ReactMapGL from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 //import {SVGOverlay, NavigationControl} from 'react-map-gl';
-//import CustomMarker from './components/CustomMarker';
+import CustomMarker from './components/CustomMarker';
 
 /*function redraw({project}) {
   const [cx, cy] = project([-122, 37]);
@@ -16,7 +16,7 @@ class Map extends Component {
   }
   onViewportChanged = viewport => { this.setState({ viewport: viewport })}
   render() {
-    const { onLocationSelected, cursorType } = this.props;
+    const { onLocationSelected, cursorType, customMarkers } = this.props;
     const viewport = this.state.viewport;
 
     const defaultViewport = {
@@ -45,8 +45,15 @@ class Map extends Component {
         mapboxApiAccessToken="pk.eyJ1IjoiYnJhZGZvcmRtZWRlaXJvcyIsImEiOiJjamNpbzlyZHYzcjN0MzNsbDhhMTYwZGpjIn0.Av3F9QUzoVSBi7g6HQt_TA"
         onViewportChange={this.onViewportChanged}
       >
+        {customMarkers.map(marker => (
+          <CustomMarker
+            zoom={viewport && viewport.zoom}
+            name={marker.name}
+            latitude={marker.location.latitude}
+            longitude={marker.location.longitude}
+          />
+        ))}
         {/*<SVGOverlay redraw={redraw} />*/}
-        {/*<CustomMarker latitude={47.78} longitude={-122.41}  />*/}
       </ReactMapGL>
     );
   }
@@ -55,6 +62,7 @@ class Map extends Component {
 Map.propTypes = {
   cursorType: PropTypes.string,
   onLocationSelected: PropTypes.func,
+  customMarkers: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default Dimensions()(Map);
