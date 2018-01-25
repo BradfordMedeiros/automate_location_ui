@@ -5,16 +5,18 @@ import WithData from '../data/WithData';
 
 const WithInstallations = WithData.polling.WithInstallations;
 
-const ControlPanel = props => (
+const ControlPanel = ({ contentType, selectedInstallation, style }) => (
   <WithInstallations>
     {({ data }) => {
       return (
         <ControlPanelComponent
+          style={style}
+          selectedInstallation={selectedInstallation}
           installations={data}
+          contentType={contentType}
           onClick={installation => {
             console.log(installation);
           }}
-          {...props}
         />
       )
     }}
@@ -23,6 +25,7 @@ const ControlPanel = props => (
 
 const mapStateToProps = state => ({
   contentType: state.getIn(['reducer', 'selectedContent']),
+  selectedInstallation: state.getIn(['reducer', 'selectedInstallation']),
 });
 
 export const container = connect(mapStateToProps)(ControlPanel);

@@ -13,37 +13,40 @@ const styles = {
     color: 'rgb(30,30,30)',
     padding: 20,
   },
-  installation: {
-    background: 'black',
+  installation: isSelected => ({
+    background: 'black' ,
     color: 'whitesmoke',
     fontSize: 20,
     display: 'flex',
     justifyContent: 'center',
     padding: 18,
-    border: '1px solid rgba(210,210,210,0.1)',
+    border: isSelected ? '1px solid whitesmoke' : '1px solid rgba(210,210,210,0.1)',
     cursor: 'pointer',
     fontFamily: 'courier',
     overflowX: 'auto',
-  }
+  }),
 };
 
 
 class ControlPanel extends Component {
   render() {
-    const {contentType, onClick, installations, style} = this.props;
+    const {contentType, onClick, installations, selectedInstallation, style} = this.props;
     return (
       <div style={{...style, ...styles.outer }}>
         <div style={styles.title}>{contentType}</div>
         <div>
-          {installations.map(installation => (
-            <div
-              style={styles.installation}
-              onClick={() => {
-                onClick(installation)
-              }}>
-              {installation.name}
-            </div>
-          ))}
+          {installations.map(installation => {
+            const isSelected = selectedInstallation ? (installation.uuid === selectedInstallation.uuid) : false;
+            return (
+              <div
+                style={styles.installation(isSelected)}
+                onClick={() => {
+                  onClick(installation)
+                }}>
+                {installation.name}
+              </div>
+            )
+          })}
         </div>
       </div>
     )

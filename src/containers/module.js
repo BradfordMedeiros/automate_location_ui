@@ -5,6 +5,8 @@ const initialState = fromJS({
   isContentPanelExpanded: false,
   contentPanelContent: null,
 
+  selectedInstallation: null,
+
   // mode actions are specific to mode, must all bee called before proceeding by element
   mode: 'default',
   modeActions: null,
@@ -24,12 +26,16 @@ export const setContentPanelContent = content => ({
   content,
 });
 
+export const setSelectedInstallation = installation => ({
+  type: 'set_selected_installation',
+  installation,
+});
+
 export const setMode = (mode, modeActions) => ({
   type: 'set_mode',
   mode,
   modeActions,
 });
-
 export const advanceStep = payload => (dispatch, getState) => {
   const modeActions = getState().getIn(['reducer', 'modeActions']);
   modeActions.next(payload);
@@ -56,6 +62,9 @@ const reducer = (state = initialState, action) => {
     }
     case 'set_content_panel_content': {
       return state.set('contentPanelContent', action.content);
+    }
+    case 'set_selected_installation': {
+      return state.set('selectedInstallation', action.installation);
     }
     case 'set_mode': {
       return state.set('mode', action.mode).set('modeActions', action.modeActions);

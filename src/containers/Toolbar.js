@@ -18,13 +18,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onContentSelected: content => {
-    if (content === 'Misc'){
-      dispatch(setShowContentPanel())
-    }else{
-      dispatch(setSelectedContent(content));
-    }
-  }
+  onContentSelected: content => { dispatch(setSelectedContent(content)) }
 });
 
 export const container = connect(mapStateToProps, mapDispatchToProps)(Toolbar);

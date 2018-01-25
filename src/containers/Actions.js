@@ -28,9 +28,9 @@ const Actions = ({ selectedContent, negativeWidth, onSetMode, onExpandContentPan
       {
         name: 'Add New',
         onClick: () => {
-          const data = { };
-          const cancel =  hideContentPanel;
-          onExpandContentPanel(<NameDialog onSubmit={advanceStep} />);
+          const data = {};
+          const cancel = hideContentPanel;
+          onExpandContentPanel(<NameDialog onSubmit={advanceStep}/>);
           onSetMode('add_installation:0', {
             next: name => {
               data.name = name;
@@ -59,7 +59,16 @@ const Actions = ({ selectedContent, negativeWidth, onSetMode, onExpandContentPan
         name: 'Delete Selected'
       },
     ],
-    'Misc': [],
+    'Misc': [
+      {
+        name: 'Set Location as Default',
+        onClick: () => { },
+      },
+      {
+        name: 'Goto Default Location',
+        onClick: () => { },
+      }
+    ],
   };
 
   return (

@@ -16,7 +16,7 @@ class Map extends Component {
   }
   onViewportChanged = viewport => { this.setState({ viewport: viewport })}
   render() {
-    const { onLocationSelected, cursorType, customMarkers } = this.props;
+    const { onLocationSelected, cursorType, customMarkers, onSetLocationFunc, onMarkerClick } = this.props;
     const viewport = this.state.viewport;
 
     const defaultViewport = {
@@ -31,15 +31,22 @@ class Map extends Component {
 
     return (
       <ReactMapGL
+        ref={ref => {
+          if (ref){
+            onSetLocationFunc(({ latitude, longitude }) => {
+              const newViewport =  {...viewportToRender, latitude, longitude, zoom: 20 };
+              this.setState({ viewport: newViewport });
+            })
+          }
+        }}
         style={{
           cursor: cursorType ? cursorType : undefined,
         }}
         mapStyle="mapbox://styles/mapbox/satellite-v9"
         {...viewportToRender}
         onClick={(event,v) => {
-          window.e = event;
           if (onLocationSelected){
-            onLocationSelected({ longitude: e.lngLat[0], latitude: e.lngLat[1] });
+            onLocationSelected({ longitude: event.lngLat[0], latitude: event.lngLat[1] });
           }
         }}
         mapboxApiAccessToken="pk.eyJ1IjoiYnJhZGZvcmRtZWRlaXJvcyIsImEiOiJjamNpbzlyZHYzcjN0MzNsbDhhMTYwZGpjIn0.Av3F9QUzoVSBi7g6HQt_TA"
@@ -49,6 +56,7 @@ class Map extends Component {
           <CustomMarker
             zoom={viewport && viewport.zoom}
             name={marker.name}
+            onClick={() => onMarkerClick(marker)}
             latitude={marker.location.latitude}
             longitude={marker.location.longitude}
           />
@@ -62,7 +70,9 @@ class Map extends Component {
 Map.propTypes = {
   cursorType: PropTypes.string,
   onLocationSelected: PropTypes.func,
+  onMarkerClick: PropTypes.func,
   customMarkers: PropTypes.arrayOf(PropTypes.object),
+  onSetLocationFunc: PropTypes.func,
 };
 
 export default Dimensions()(Map);

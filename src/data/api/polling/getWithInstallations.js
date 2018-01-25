@@ -1,7 +1,7 @@
 import { Component, PropTypes } from 'react';
 
 export const installations = [
-  { name: 'test', location: { latitude: 34, longitude: 32}},
+  { name: 'test', location: { latitude: 34, longitude: 32}, uuid : 'apple' },
 ];
 window.i = installations;
 
