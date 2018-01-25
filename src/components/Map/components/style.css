@@ -10,4 +10,5 @@
 .custom_marker:hover {
     background: rgba(210,210,210, 0.8);
     color: rgba(0,0,0,0.8);
+    cursor: pointer;
 }
