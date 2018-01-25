@@ -6,10 +6,8 @@ import WithData from '../data/WithData';
 const WithInstallations = WithData.polling.WithInstallations;
 
 class Map extends Component {
-  setLocation = null;
-
   render() {
-    const {mode, onAdvanceStep, onSetSelectedInstallation } = this.props;
+    const {mode, onAdvanceStep, onSetSelectedInstallation, onSetLocationFunc } = this.props;
     const isModeAddInstallation1 = mode === 'add_installation:1';
 
     return (
@@ -17,7 +15,7 @@ class Map extends Component {
         {({data}) => {
           return (
             <MapComponent
-              onSetLocationFunc={setLocation => { this.setLocation = setLocation }}
+              onSetLocationFunc={onSetLocationFunc}
               customMarkers={data}
               cursorType={isModeAddInstallation1 ? 'crosshair' : undefined}
               onMarkerClick={installation => {

@@ -34,7 +34,7 @@ class Map extends Component {
         ref={ref => {
           if (ref){
             onSetLocationFunc(({ latitude, longitude }) => {
-              const newViewport =  {...viewportToRender, latitude, longitude, zoom: 20 };
+              const newViewport =  {...viewportToRender, latitude, longitude, zoom: 12 };
               this.setState({ viewport: newViewport });
             })
           }
