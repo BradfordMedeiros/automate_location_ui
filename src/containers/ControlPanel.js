@@ -2,10 +2,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import ControlPanelComponent from '../components/ControlPanel/ControlPanel';
 import WithData from '../data/WithData';
+import { setSelectedInstallation } from './module';
 
 const WithInstallations = WithData.polling.WithInstallations;
 
-const ControlPanel = ({ contentType, selectedInstallation, style }) => (
+const ControlPanel = ({
+  contentType,
+  selectedInstallation,
+  onSetSelectedInstallation,
+  style
+}) => (
   <WithInstallations>
     {({ data }) => {
       return (
@@ -15,7 +21,7 @@ const ControlPanel = ({ contentType, selectedInstallation, style }) => (
           installations={data}
           contentType={contentType}
           onClick={installation => {
-            console.log(installation);
+            onSetSelectedInstallation(installation);
           }}
         />
       )
@@ -28,5 +34,9 @@ const mapStateToProps = state => ({
   selectedInstallation: state.getIn(['reducer', 'selectedInstallation']),
 });
 
-export const container = connect(mapStateToProps)(ControlPanel);
+const mapDispatchToProps = dispatch => ({
+  onSetSelectedInstallation: installation => dispatch(setSelectedInstallation(installation)),
+});
+
+export const container = connect(mapStateToProps, mapDispatchToProps)(ControlPanel);
 

@@ -31,7 +31,15 @@ const App = () => (
       <ContentPanel  style={{ zIndex: 1 }} />
       <div style={{ position: 'absolute', zIndex: 100, width: '100%'  }}>
         <Toolbar negativeWidth={controlPanelWidth} />
-        <Actions negativeWidth={controlPanelWidth} />
+        <Actions
+          onGoToOnMap={() => {
+            console.log('go to on map');
+          }}
+          onJumpToAutomate={() => {
+            c
+          }}
+          negativeWidth={controlPanelWidth}
+        />
         <HelpInfo />
       </div>
       <div style={{ position: 'relative', left: 0,  right: 0, top: 0, bottom: 0, overflow: 'hidden' }}>

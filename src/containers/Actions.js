@@ -8,12 +8,21 @@ import WithData from '../data/WithData';
 
 const addInstallation = WithData.requests.addInstallation;
 
-const Actions = ({ selectedContent, negativeWidth, onSetMode, onExpandContentPanel, hideContentPanel, advanceStep }) => {
+const Actions = ({
+  onGoToOnMap,
+  onJumpToAutomate,
+  selectedContent,
+  negativeWidth,
+  onSetMode,
+  onExpandContentPanel,
+  hideContentPanel,
+  advanceStep,
+}) => {
   const actionMap = {
     'View Installations': [
       {
         name: 'Goto on Map',
-        onClick: () => console.log('go to map'),
+        onClick: onGoToOnMap,
       },
       {
         name: 'Summary Info',
@@ -21,7 +30,7 @@ const Actions = ({ selectedContent, negativeWidth, onSetMode, onExpandContentPan
       },
       {
         name: 'Jump To Automate',
-        onClick: () => console.log('jump to automate'),
+        onClick: onJumpToAutomate,
       },
     ],
     'Manage Installations': [
@@ -30,7 +39,7 @@ const Actions = ({ selectedContent, negativeWidth, onSetMode, onExpandContentPan
         onClick: () => {
           const data = {};
           const cancel = hideContentPanel;
-          onExpandContentPanel(<NameDialog onSubmit={advanceStep}/>);
+          onExpandContentPanel(<NameDialog instructions="enter name of the installation" onSubmit={advanceStep}/>);
           onSetMode('add_installation:0', {
             next: name => {
               data.name = name;
