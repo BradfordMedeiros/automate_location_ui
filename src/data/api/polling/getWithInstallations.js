@@ -1,18 +1,17 @@
 import { Component, PropTypes } from 'react';
 
-export const installations = [
+export let installations = [
   { name: 'test', location: { latitude: 34, longitude: 32}, uuid : 'apple' },
 ];
-window.i = installations;
+export const setInstallations = newInstallations => {
+  installations = newInstallations;
+};
 
 
 const getWithInstallations = (AUTOMATE_CORE_URL) => {
   // for now until we have backend, should definitely not do this,
 
   class WithInstallations extends Component {
-    state = {
-      installations,
-    }
     getInstallations = () => {
       this.forceUpdate();
     };

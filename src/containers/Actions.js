@@ -7,6 +7,7 @@ import NameDialog from '../components/NameDialog/NameDialog';
 import WithData from '../data/WithData';
 
 const addInstallation = WithData.requests.addInstallation;
+const deleteInstallation = WithData.requests.deleteInstallation;
 
 const Actions = ({
   onGoToOnMap,
@@ -17,6 +18,7 @@ const Actions = ({
   onExpandContentPanel,
   hideContentPanel,
   advanceStep,
+  selectedInstallation,
 }) => {
   const actionMap = {
     'View Installations': [
@@ -65,7 +67,10 @@ const Actions = ({
         name: 'Edit Data Sources'
       },
       {
-        name: 'Delete Selected'
+        name: 'Delete Selected',
+        onClick: () => {
+          deleteInstallation(selectedInstallation);
+        }
       },
     ],
     'Misc': [
@@ -91,6 +96,7 @@ const Actions = ({
 
 const mapStateToProps = state => ({
   selectedContent: state.getIn(['reducer', 'selectedContent']),
+  selectedInstallation: state.getIn(['reducer', 'selectedInstallation']),
 });
 
 
