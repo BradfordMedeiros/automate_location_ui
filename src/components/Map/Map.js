@@ -3,7 +3,7 @@ import Dimensions from 'react-dimensions';
 import ReactMapGL from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 //import {SVGOverlay, NavigationControl} from 'react-map-gl';
-import CustomMarker from './components/CustomMarker';
+import CustomMarker from './components/CustomMarker/CustomMarker';
 
 /*function redraw({project}) {
   const [cx, cy] = project([-122, 37]);

@@ -3,7 +3,6 @@ import React, { PropTypes } from 'react';
 import { Marker } from 'react-map-gl';
 import './style.css';
 
-
 const CustomMarker = ({ name, latitude, longitude, zoom, onClick }) => {
   const showFullMarker = zoom > 10;
   return (
