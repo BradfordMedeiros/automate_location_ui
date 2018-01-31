@@ -12,6 +12,7 @@ import { container as ContentPanel } from './containers/ContentPanel';
 import { container as Actions } from './containers/Actions';
 import { container as Toolbar } from './containers/Toolbar';
 import { container as HelpInfo } from './containers/HelpInfo';
+import WithData from './data/WithData';
 
 /*
  notes: create pull out drawer on left size to bring up content editor view
@@ -23,11 +24,13 @@ const reducers = combineReducers({ reducer });
 const store = createStore(reducers, applyMiddleware(logger(), thunk));
 
 const controlPanelWidth = 400;
+const getDefaultLocation = WithData.requests.getDefaultLocation;
+const setDefaultLocation = WithData.requests.setDefaultLocation;
+
 
 class App extends Component {
-  setLocation = () => {
-    console.warn('set location no-op');
-  };
+  location = null;
+
   render() {
     return (
       <Provider store={store}>
@@ -37,19 +40,33 @@ class App extends Component {
           <div style={{ position: 'absolute', zIndex: 100, width: '100%'  }}>
             <Toolbar negativeWidth={controlPanelWidth} />
             <Actions
+              negativeWidth={controlPanelWidth}
               onGoToOnMap={() => {
                 const installation = store.getState().getIn(['reducer','selectedInstallation']);
                 this.setLocation(installation.location);
               }}
-              onJumpToAutomate={() => {
-
+              onSetLocationAsDefault={() => {
+                if (this.location){
+                  setDefaultLocation(this.location);
+                }
               }}
-              negativeWidth={controlPanelWidth}
+              onGoToDefaultLocation={() => {
+                console.error('jump to default location');
+                console.error('default location is: ', getDefaultLocation());
+                this.setLocation(getDefaultLocation());
+              }}
+              onJumpToAutomate={() => {
+                console.error('not yet implemented');
+              }}
             />
             <HelpInfo />
           </div>
           <div style={{ position: 'relative', left: 0,  right: 0, top: 0, bottom: 0, overflow: 'hidden' }}>
             <Map
+              initialLocation={getDefaultLocation()}
+              onLocationChanged={location => {
+                this.location = location;
+              }}
               onSetLocationFunc={setLocationFunc => {
                 this.setLocation = setLocationFunc;
               }}

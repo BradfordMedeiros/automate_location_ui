@@ -14,17 +14,24 @@ class Map extends Component {
   state = {
     viewport: null,
   }
-  onViewportChanged = viewport => { this.setState({ viewport: viewport })}
+  onViewportChanged = viewport => {
+    this.setState({ viewport: viewport });
+    this.props.onLocationChanged(viewport);
+  };
+  componentWillMount() {
+    console.error('component will mount, props: ',  this.props.initialLocation);
+  }
   render() {
-    const { onLocationSelected, cursorType, customMarkers, onSetLocationFunc, onMarkerClick } = this.props;
+    const { onLocationSelected,  cursorType, customMarkers, onSetLocationFunc, onMarkerClick } = this.props;
     const viewport = this.state.viewport;
 
+    const initialLocation = this.props.initialLocation || { latitude: 37, longitude: -122, zoom: 8 };
     const defaultViewport = {
       width: this.props.containerWidth,
       height: this.props.containerHeight,
-      latitude: 37.7577,
-      longitude: -122.4376,
-      zoom: 8
+      latitude: initialLocation.latitude,
+      longitude: initialLocation.longitude,
+      zoom: initialLocation.zoom,
     };
 
     const viewportToRender  = viewport ? viewport : defaultViewport;
@@ -33,8 +40,8 @@ class Map extends Component {
       <ReactMapGL
         ref={ref => {
           if (ref){
-            onSetLocationFunc(({ latitude, longitude }) => {
-              const newViewport =  {...viewportToRender, latitude, longitude, zoom: 12 };
+            onSetLocationFunc(({ latitude, longitude, zoom = 12 }) => {
+              const newViewport =  {...viewportToRender, latitude, longitude, zoom };
               this.setState({ viewport: newViewport });
             })
           }
@@ -69,10 +76,12 @@ class Map extends Component {
 
 Map.propTypes = {
   cursorType: PropTypes.string,
+  initialLocation: PropTypes.object,
   onLocationSelected: PropTypes.func,
   onMarkerClick: PropTypes.func,
   customMarkers: PropTypes.arrayOf(PropTypes.object),
   onSetLocationFunc: PropTypes.func,
+  onLocationChanged: PropTypes.func,
 };
 
 export default Dimensions()(Map);

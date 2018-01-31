@@ -11,6 +11,8 @@ const deleteInstallation = WithData.requests.deleteInstallation;
 
 const Actions = ({
   onGoToOnMap,
+  onGoToDefaultLocation,
+  onSetLocationAsDefault,
   onJumpToAutomate,
   selectedContent,
   negativeWidth,
@@ -76,11 +78,11 @@ const Actions = ({
     'Misc': [
       {
         name: 'Set Location as Default',
-        onClick: () => { },
+        onClick: onSetLocationAsDefault,
       },
       {
         name: 'Goto Default Location',
-        onClick: () => { },
+        onClick: onGoToDefaultLocation,
       }
     ],
   };
