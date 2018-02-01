@@ -4,23 +4,15 @@ const styles = {
   outer: {
     background: 'linear-gradient(rgba(10,10,10,0.5), rgba(10,10,10,0.8))',
     boxShadow: '0px 0px 10px 1px rgba(0,0,0,0.5)',
-  },
-  title: {
-    fontSize: 18,
-    display: 'flex',
-    justifyContent: 'center',
-    background: 'rgb(30,30,30)',
-    color: 'rgb(30,30,30)',
-    padding: 20,
+    zIndex: 200,
   },
   installation: isSelected => ({
-    background: 'black' ,
     color: 'whitesmoke',
     fontSize: 20,
     display: 'flex',
     justifyContent: 'center',
     padding: 18,
-    border: isSelected ? '1px solid whitesmoke' : '1px solid rgba(210,210,210,0.1)',
+    border: isSelected ? '1px solid whitesmoke' : '1px solid rgba(0,0,0,0.5)',
     cursor: 'pointer',
     fontFamily: 'courier',
     overflowX: 'auto',
@@ -30,24 +22,21 @@ const styles = {
 
 class ControlPanel extends Component {
   render() {
-    const {contentType, onClick, installations, selectedInstallation, style} = this.props;
+    const {onClick, installations, selectedInstallation, style} = this.props;
     return (
-      <div style={{...style, ...styles.outer }}>
-        <div style={styles.title}>{contentType}</div>
-        <div>
-          {installations.map(installation => {
-            const isSelected = selectedInstallation ? (installation.uuid === selectedInstallation.uuid) : false;
-            return (
-              <div
-                style={styles.installation(isSelected)}
-                onClick={() => {
-                  onClick(installation)
-                }}>
-                {installation.name}
-              </div>
-            )
-          })}
-        </div>
+      <div style={{...style, ...styles.outer}}>
+        {installations.map(installation => {
+          const isSelected = selectedInstallation ? (installation.uuid === selectedInstallation.uuid) : false;
+          return (
+            <div
+              style={styles.installation(isSelected)}
+              onClick={() => {
+                onClick(installation)
+              }}>
+              {installation.name}
+            </div>
+          )
+        })}
       </div>
     )
   }

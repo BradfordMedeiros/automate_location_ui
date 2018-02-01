@@ -12,6 +12,8 @@ import { container as ContentPanel } from './containers/ContentPanel';
 import { container as Actions } from './containers/Actions';
 import { container as Toolbar } from './containers/Toolbar';
 import { container as HelpInfo } from './containers/HelpInfo';
+import { container as Toolbox } from './containers/Toolbox';
+
 import WithData from './data/WithData';
 
 /*
@@ -35,7 +37,9 @@ class App extends Component {
     return (
       <Provider store={store}>
         <div style={{ position: 'absolute', width: '100vw', height: '100vh' }}>
-          <ControlPanel style={{ position: 'absolute', top: 0, right: 0, width: controlPanelWidth, height: '100%', zIndex: 1 }} />
+          <ControlPanel style={{ position: 'absolute', top: 0, right: 0, width: controlPanelWidth, bottom: 0, zIndex: 1 }} />
+          <Toolbox />
+
           <ContentPanel  style={{ zIndex: 1 }} />
           <div style={{ position: 'absolute', zIndex: 100, width: '100%'  }}>
             <Toolbar negativeWidth={controlPanelWidth} />

@@ -63,7 +63,17 @@ const Actions = ({
         },
       },
       {
-        name: 'Edit Layout'
+        name: 'Edit Layout',
+        onClick: () => {
+          onSetMode('edit_installation:0', {
+            next: () => {
+              console.error('next called');
+            },
+            cancel: () => {
+              console.error('cancel called');
+            }
+          });
+        }
       },
       {
         name: 'Edit Data Sources'
