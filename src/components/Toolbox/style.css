@@ -19,7 +19,7 @@
 }
 
 .toolbox_icon {
-    width: 50px;
+    width: 60px;
     height: 40px;
     background: #0c0c0c;
     border: 1px solid rgb(20,20,20);
@@ -39,13 +39,13 @@
         width: 0px;
     }
     to {
-        width: 70px;
+        width: 120px;
     }
 }
 
 @keyframes toolbox_slide_out {
     from {
-       width: 70px;
+       width: 120px;
     }
     to {
        width: 0px;

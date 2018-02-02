@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 const styles = {
   outer: {
-    background: 'linear-gradient(rgba(10,10,10,0.5), rgba(10,10,10,0.8))',
+    background: 'linear-gradient(rgba(10,10,10,0.8), rgba(0,0,0,0.8))',
     boxShadow: '0px 0px 10px 1px rgba(0,0,0,0.5)',
     zIndex: 200,
   },

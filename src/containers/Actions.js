@@ -66,6 +66,9 @@ const Actions = ({
         name: 'Edit Layout',
         onClick: () => {
           onSetMode('edit_installation:0', {
+            options: {
+              selected: 'icon',
+            },
             next: () => {
               console.error('next called');
             },
