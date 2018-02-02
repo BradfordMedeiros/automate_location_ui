@@ -14,7 +14,7 @@ const styles = {
     padding: 18,
     border: isSelected ? '1px solid whitesmoke' : '1px solid rgba(0,0,0,0.5)',
     cursor: 'pointer',
-    fontFamily: 'courier',
+    fontFamily: isSelected ? 'arial' : 'courier',
     overflowX: 'auto',
   }),
 };

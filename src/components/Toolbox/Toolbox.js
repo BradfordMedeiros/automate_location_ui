@@ -7,6 +7,8 @@ const options = [
   '3D',
   'geo',
   'marker',
+  'move',
+  'delete',
 ];
 
 const style = isVisible => ({
