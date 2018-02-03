@@ -21,6 +21,7 @@ const Actions = ({
   hideContentPanel,
   advanceStep,
   selectedInstallation,
+  modeActions,
 }) => {
   const actionMap = {
     'View Installations': [
@@ -67,10 +68,12 @@ const Actions = ({
         onClick: () => {
           onSetMode('edit_installation:0', {
             options: {
-              selected: 'icon',
+              selected: 'move',
             },
-            next: () => {
+            next: ({ location, modeActions }) => {
               console.error('next called');
+              console.error('location: ', location);
+              console.error('mode actions: ', modeActions);
             },
             cancel: () => {
               console.error('cancel called');
@@ -112,6 +115,7 @@ const Actions = ({
 const mapStateToProps = state => ({
   selectedContent: state.getIn(['reducer', 'selectedContent']),
   selectedInstallation: state.getIn(['reducer', 'selectedInstallation']),
+  modeActions: state.getIn(['reducer', 'modeActions']),
 });
 
 

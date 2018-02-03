@@ -18,6 +18,25 @@
     overflow: hidden;
 }
 
+#toolbox_expanded {
+    top: 290px;
+    bottom: 0;
+    position: absolute;
+    z-index: 4;
+    width: 500px;
+    right: 400;
+    background: linear-gradient(rgb(20,20,20), rgb(10,10,10));
+    border: 1px solid rgba(0, 0, 0, 0.45);
+    color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.61);
+    border-radius: 300px 0px 0px 0px;
+    overflow: hidden;
+}
+
 .toolbox_icon {
     width: 60px;
     height: 40px;
@@ -29,6 +48,8 @@
     color: #545454;
     cursor: pointer;
 }
+
+
 
 .toolbox_icon:hover {
     color: white;
@@ -51,3 +72,24 @@
        width: 0px;
     }
 }
+
+@keyframes toolbox_expanded_slide_in {
+    from {
+        width: 0px;
+    }
+    to {
+        width: 500px;
+    }
+}
+
+@keyframes toolbox_expanded_slide_out {
+    from {
+        width: 500px;
+    }
+    to {
+        width: 0px;
+    }
+}
+
+
+

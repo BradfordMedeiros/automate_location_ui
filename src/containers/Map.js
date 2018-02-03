@@ -7,12 +7,10 @@ import WithData from '../data/WithData';
 const WithInstallations = WithData.polling.WithInstallations;
 
 class Map extends Component {
-  componentWillMount() {
-    console.error('------component mounting---------');
-  }
   render() {
-    const {mode, onAdvanceStep, onSetSelectedInstallation, onSetLocationFunc, initialLocation, onLocationChanged } = this.props;
+    const {mode, onAdvanceStep, onSetSelectedInstallation, onSetLocationFunc, initialLocation, onLocationChanged, modeActions} = this.props;
     const isModeAddInstallation1 = mode === 'add_installation:1';
+    const isModeEditInstallation = mode === 'edit_installation:0';
 
     return (
       <WithInstallations>
@@ -23,13 +21,15 @@ class Map extends Component {
               onLocationChanged={onLocationChanged}
               onSetLocationFunc={onSetLocationFunc}
               customMarkers={data}
-              cursorType={isModeAddInstallation1 ? 'crosshair' : undefined}
+              cursorType={(isModeAddInstallation1 || isModeEditInstallation) ? 'crosshair' : undefined}
               onMarkerClick={installation => {
                 onSetSelectedInstallation(installation);
               }}
               onLocationSelected={location => {
                 if (isModeAddInstallation1) {
                   onAdvanceStep(location);
+                } else if (isModeEditInstallation) {
+                  onAdvanceStep({location, modeActions});
                 }
               }}
             />
@@ -42,10 +42,11 @@ class Map extends Component {
 
 const mapStateToProps = state => ({
   mode: state.getIn(['reducer', 'mode']),
+  modeActions: state.getIn(['reducer', 'modeActions']),
 });
 
 const mapDispatchToProps = dispatch => ({
-  onAdvanceStep: location => dispatch(advanceStep(location)),
+  onAdvanceStep: data => dispatch(advanceStep(data)),
   onSetSelectedInstallation: installation => dispatch(setSelectedInstallation(installation)),
 });
 

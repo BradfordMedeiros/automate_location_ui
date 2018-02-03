@@ -18,9 +18,6 @@ class Map extends Component {
     this.setState({ viewport: viewport });
     this.props.onLocationChanged(viewport);
   };
-  componentWillMount() {
-    console.error('component will mount, props: ',  this.props.initialLocation);
-  }
   render() {
     const { onLocationSelected,  cursorType, customMarkers, onSetLocationFunc, onMarkerClick } = this.props;
     const viewport = this.state.viewport;
