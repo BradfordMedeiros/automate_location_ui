@@ -79,12 +79,14 @@
     }
     to {
         width: 500px;
+        padding-right: 125px;
     }
 }
 
 @keyframes toolbox_expanded_slide_out {
     from {
         width: 500px;
+        padding-right: 125px;
     }
     to {
         width: 0px;

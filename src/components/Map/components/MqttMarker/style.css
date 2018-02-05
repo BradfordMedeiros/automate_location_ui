@@ -1,0 +1,24 @@
+
+.mqtt_marker {
+    color: red;
+    font-family: monospace;
+    font-size: 20px;
+}
+
+.mqtt_marker:hover {
+    color: whitesmoke;
+    font-size: 18px;
+}
+
+.mqtt_marker_icon{
+    background: rgba(70, 130, 180, 0.3);
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    padding: 10px;
+    margin: 8px;
+    border: 1px solid whitesmoke;
+}
+
+
+

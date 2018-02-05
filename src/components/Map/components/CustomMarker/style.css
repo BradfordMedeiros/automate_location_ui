@@ -1,14 +1,23 @@
 
 .custom_marker {
-    padding: 10px;
-    background: rgba(0, 0, 0, 0.5);
-    border: 1px solid black;
-    color: whitesmoke;
-    border-radius: 8%;
+    color: rgba(0,0,0,0);
+    font-family: monospace;
+    font-size: 0;
 }
 
 .custom_marker:hover {
-    background: rgba(210,210,210, 0.8);
-    color: rgba(0,0,0,0.8);
-    cursor: pointer;
+    color: whitesmoke;
+    font-size: 18;
 }
+
+.custom_marker_icon{
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 8%;
+    width: 20px;
+    height: 20px;
+    padding: 10px;
+    margin: 8px;
+    border: 1px solid steelblue;
+}
+
+

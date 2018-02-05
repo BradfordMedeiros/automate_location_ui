@@ -2,13 +2,22 @@ import React, { PropTypes, Component } from 'react';
 import Dimensions from 'react-dimensions';
 import ReactMapGL from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-//import {SVGOverlay, NavigationControl} from 'react-map-gl';
+import Installation from './components/InstallationLabel/Installation';
 import CustomMarker from './components/CustomMarker/CustomMarker';
+import MqttMarker from './components/MqttMarker/MqttMarker';
+import Label from './components/Label/Label';
 
-/*function redraw({project}) {
-  const [cx, cy] = project([-122, 37]);
-  return <circle cx={cx} cy={cy} r={4} fill="blue" />;
-}*/
+const flattenField = (installations, field) => {
+  const things = [];
+  installations.forEach(installation => {
+    if (installation[field]){
+      installation[field].forEach(thing => {
+        things.push(thing);
+      })
+    }
+  });
+  return things;
+};
 
 class Map extends Component {
   state = {
@@ -19,7 +28,7 @@ class Map extends Component {
     this.props.onLocationChanged(viewport);
   };
   render() {
-    const { onLocationSelected,  cursorType, customMarkers, onSetLocationFunc, onMarkerClick } = this.props;
+    const { onLocationSelected,  cursorType, installations, onSetLocationFunc, onMarkerClick } = this.props;
     const viewport = this.state.viewport;
 
     const initialLocation = this.props.initialLocation || { latitude: 37, longitude: -122, zoom: 8 };
@@ -46,7 +55,7 @@ class Map extends Component {
         style={{
           cursor: cursorType ? cursorType : undefined,
         }}
-        mapStyle="mapbox://styles/mapbox/satellite-v9"
+        mapStyle={"mapbox://styles/mapbox/satellite-v9"}
         {...viewportToRender}
         onClick={(event,v) => {
           if (onLocationSelected){
@@ -56,16 +65,44 @@ class Map extends Component {
         mapboxApiAccessToken="pk.eyJ1IjoiYnJhZGZvcmRtZWRlaXJvcyIsImEiOiJjamNpbzlyZHYzcjN0MzNsbDhhMTYwZGpjIn0.Av3F9QUzoVSBi7g6HQt_TA"
         onViewportChange={this.onViewportChanged}
       >
-        {customMarkers.map(marker => (
+        {installations.map(installation => (
+            <Installation
+              zoom={viewport && viewport.zoom}
+              name={installation.name}
+              onClick={() => onMarkerClick(installation)}
+              latitude={installation.location.latitude}
+              longitude={installation.location.longitude}
+            />
+        ))}
+        {flattenField(installations, 'markers').map(marker => (
           <CustomMarker
+            latitude={marker.latitude}
+            longitude={marker.longitude}
             zoom={viewport && viewport.zoom}
-            name={marker.name}
-            onClick={() => onMarkerClick(marker)}
-            latitude={marker.location.latitude}
-            longitude={marker.location.longitude}
+            description={marker.description}
+            onClick={() => {
+            }}
           />
         ))}
-        {/*<SVGOverlay redraw={redraw} />*/}
+        {flattenField(installations, 'labels').map(label => (
+          <Label
+            latitude={label.latitude}
+            longitude={label.longitude}
+            zoom={viewport && viewport.zoom}
+            description={label.description}
+            onClick={() => {
+            }}
+          />
+        ))}
+        {flattenField(installations, 'mqttMarkers').map(marker => (
+          <MqttMarker
+            topic={marker.topic}
+            zoom={viewport && viewport.zoom}
+            description={marker.description}
+            onClick={() => {
+            }}
+          />
+        ))}
       </ReactMapGL>
     );
   }
@@ -76,7 +113,7 @@ Map.propTypes = {
   initialLocation: PropTypes.object,
   onLocationSelected: PropTypes.func,
   onMarkerClick: PropTypes.func,
-  customMarkers: PropTypes.arrayOf(PropTypes.object),
+  installations: PropTypes.arrayOf(PropTypes.object),
   onSetLocationFunc: PropTypes.func,
   onLocationChanged: PropTypes.func,
 };

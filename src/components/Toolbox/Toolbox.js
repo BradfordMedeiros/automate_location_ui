@@ -1,7 +1,6 @@
 
 import React from 'react';
 import LabelDetail from './components/LabelDetail';
-import IconDetail  from './components/IconDetail';
 import ThreeDDetail from './components/3DDetail';
 import MarkerDetail from './components/MarkerDetail';
 import GeoDetail from './components/GeoDetail';
@@ -17,10 +16,6 @@ const options = {
   label: {
     hasDetail: true,
     component: LabelDetail,
-  },
-  icon: {
-    hasDetail: true,
-    component: IconDetail,
   },
   '3D': {
     hasDetail: true,

@@ -20,7 +20,7 @@ class Map extends Component {
               initialLocation={initialLocation}
               onLocationChanged={onLocationChanged}
               onSetLocationFunc={onSetLocationFunc}
-              customMarkers={data}
+              installations={data}
               cursorType={(isModeAddInstallation1 || isModeEditInstallation) ? 'crosshair' : undefined}
               onMarkerClick={installation => {
                 onSetSelectedInstallation(installation);

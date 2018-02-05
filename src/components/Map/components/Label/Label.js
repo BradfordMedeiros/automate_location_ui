@@ -3,19 +3,17 @@ import React, { PropTypes } from 'react';
 import { Marker } from 'react-map-gl';
 import './style.css';
 
-const CustomMarker = ({ description, latitude, longitude, zoom, onClick }) => {
-  const showFullMarker = zoom > 10;
+const Label = ({ description, latitude, longitude }) => {
   return (
     <Marker latitude={latitude}  longitude={longitude}  >
-      <div className="custom_marker">
-        <div onClick={onClick} className="custom_marker_icon" style={{ padding: showFullMarker ? 24 : 10  }} />
+      <div className="map_custom_label">
         {description}
       </div>
     </Marker>
   );
 }
 
-CustomMarker.propTypes = {
+Label.propTypes = {
   description: PropTypes.string,
   latitude: PropTypes.number,
   longitude: PropTypes.number,
@@ -23,4 +21,4 @@ CustomMarker.propTypes = {
   onClick: PropTypes.func,
 };
 
-export default CustomMarker;
+export default Label;
