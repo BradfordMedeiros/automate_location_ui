@@ -31,6 +31,13 @@ export let installations = localStorage.getItem('installations') ? JSON.parse(lo
           description: 'Bay Temperature: 20',
         },
       ],
+      mqttLabels: [
+        {
+          latitude: 47.626867233862514,
+          longitude: -122.33614818588159,
+          topic: 'temp',
+        }
+      ],
 
     },
   ];

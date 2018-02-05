@@ -6,6 +6,7 @@ import Installation from './components/InstallationLabel/Installation';
 import CustomMarker from './components/CustomMarker/CustomMarker';
 import MqttMarker from './components/MqttMarker/MqttMarker';
 import Label from './components/Label/Label';
+import MqttLabel from './components/MqttLabel/MqttLabel';
 
 const flattenField = (installations, field) => {
   const things = [];
@@ -101,6 +102,13 @@ class Map extends Component {
             description={marker.description}
             onClick={() => {
             }}
+          />
+        ))}
+        {flattenField(installations, 'mqttLabels').map(label => (
+          <MqttLabel
+            latitude={label.latitude}
+            longitude={label.longitude}
+            topic={label.topic}
           />
         ))}
       </ReactMapGL>
